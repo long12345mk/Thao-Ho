@@ -466,6 +466,19 @@ body {
     transform: translate(-50%, -50%);
 }
 
+/* Hiệu ứng gợn sóng cho ảnh service */
+.wave-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+  clip-path: polygon(
+    0 0, 100% 0, 100% 85%,
+    85% 95%, 70% 85%, 55% 95%,
+    40% 85%, 25% 95%, 10% 85%, 0 95%
+  );
+}
+
 /* WE HERE TO HELP */
 .help-section {
     background-color: #0094ff;
@@ -473,18 +486,13 @@ body {
     color: #fff;
 }
 
-.help-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 30px;
-    flex-wrap: wrap; /* Added flex-wrap */
-}
-
 .help-left {
-    flex: 1 1 400px; /* Added flex basis */
+    flex: 1 1 400px;
+    text-align: right; /* Căn phải chữ bên trái */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Đẩy nội dung sang phải */
+    justify-content: center;
 }
 
 .help-left h2 {
@@ -492,24 +500,31 @@ body {
     font-weight: bold;
     margin: 0;
     line-height: 1.3;
+    text-align: right; /* Căn phải tiêu đề */
 }
 
 .vertical-line {
     width: 1px;
     height: 100px;
     background-color: rgba(255, 255, 255, 0.5);
-    margin: 0 30px; /* Added margin */
+    margin: 0 30px;
 }
 
 .help-right {
-    flex: 1 1 400px; /* Added flex basis */
-    max-width: none; /* Removed max-width */
+    flex: 1 1 400px;
+    max-width: none;
+    text-align: left; /* Căn trái chữ bên phải */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Đẩy nội dung sang trái */
+    justify-content: center;
 }
 
 .help-right p {
     font-size: 0.95em;
     margin: 0 0 20px;
     line-height: 1.5;
+    text-align: left; /* Căn trái đoạn mô tả */
 }
 
 .help-call {
@@ -585,7 +600,7 @@ body {
 
 .testimonial .card img {
   width: 100%;
-  height: 300px;
+  height: 400px;
   object-fit: cover;
   border-radius: 16px 16px 0 0;
   margin: 0;
@@ -780,7 +795,7 @@ body {
 .awards .swiper-slide img {
   width: 100%;
   height: 100%;
-  object-fit: contain;   /* Ảnh ngang sẽ có viền trắng hai bên, ảnh dọc phủ kín */
+  object-fit: contain;   
   border-radius: 18px;
   display: block;
   background: #fff;
@@ -842,7 +857,7 @@ body {
 
 /* Định dạng hai mục đầu tiên */
 .faq-card.full-width {
-  grid-column: span 2; /* Hai mục đầu tiên chiếm đủ chiều rộng */
+  grid-column: span 2; 
 }
 
 
@@ -863,7 +878,7 @@ body {
 /* Icon */
 .faq-question .icon {
   display: inline-flex;
-  background: #007bff;
+  background: #0095ff; 
   color: #fff;
   border-radius: 50%;
   width: 35px;
@@ -910,7 +925,34 @@ body {
   border-radius: 8px;
 }
 .faq-icon {
-  font-size: 1.2rem;
+  background: #0094ff !important;
+  color: #fff !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+/* Ẩn icon mũi tên mặc định của Bootstrap */
+.accordion-button::after {
+  display: none !important;
+}
+
+.faq-toggle-icon {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #0094FF;
+  margin-left: auto;
+  margin-right: 10px;
+  user-select: none;
+  transition: color 0.2s;
+}
+.accordion-button:not(.collapsed) .faq-toggle-icon {
+  color: #FF5722;
+}
+.accordion-button .faq-toggle-icon {
+  pointer-events: none;
 }
 
 /* GET FREE ESTIMATE */
@@ -933,7 +975,6 @@ body {
   flex: 1;
 }
 
-.estimate-form input,
 .estimate-form textarea {
   width: 100%;
   padding: 10px;
@@ -958,9 +999,9 @@ body {
 
 .contact-info  {
   margin: 5px 0;
-  display: flex; /* Sử dụng flexbox để sắp xếp các phần tử con theo hàng ngang */
-  align-items: center; /* Căn chỉnh các phần tử con theo chiều dọc ở giữa */
-  gap: 20px; /* Tạo khoảng cách 20px giữa các phần tử con */
+  display: flex; 
+  align-items: center; 
+  gap: 20px; 
 }
 
 
@@ -970,10 +1011,62 @@ section p {
   text-align: center;
 }
 
+/* Avatar quay gương từ trái sang phải */
+.avatar-mirror {
+  transform: scaleX(-1);
+  transition: transform 0.4s;
+}
+
+/* Hàng limits of balance và số tiền */
+.limits-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.1em;
+  font-weight: 600;
+  gap: 12px;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.slider-wrapper input[type="range"] {
+  width: 100%;
+}
+
+.balance-amount {
+  position: absolute;
+  top: -28px;
+  left: 100%;
+  transform: translateX(-50%);
+  color: #007bff;
+  font-weight: bold;
+  min-width: 80px;
+  text-align: center;
+  pointer-events: none;
+  transition: left 0.1s;
+  font-size: 1.1em;
+  white-space: nowrap;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  position: relative;
+}
+
+.slider-row input[type="range"] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
 
 /* FOOTER  */
 .footer-section {
-  background: #004e59 ;
+  background: #092c3a; 
   color: #fff;
   font-size: 1rem;
   padding-top: 48px;
@@ -1001,7 +1094,7 @@ section p {
 }
 
 .footer-desc {
-  text-align: center;
+  text-align: left;
   margin-bottom: 22px;
   font-size: 1.08em;
   color: #e0e0e0;
@@ -1112,12 +1205,10 @@ section p {
   min-width: 50px;
 }
 .footer-bottom {
+  width: 100%;
+  background: #000;
   border-top: 1px solid #222;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  padding-left: 90px;
-  padding-right: 90px;
+  padding: 1.5rem 5vw;
   font-size: 1.08em;
   color: #b0c4ce;
   display: flex;
@@ -1125,7 +1216,7 @@ section p {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  background: #000; 
+  box-sizing: border-box;
 }
 .footer-bottom .footer-links {
   display: flex;
