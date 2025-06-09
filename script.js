@@ -45,3 +45,36 @@ document.querySelectorAll('.continue-reading-link').forEach(link => {
         alert("Continue Reading clicked!"); 
     });
 });
+
+// FAQ + - icon logic
+document.addEventListener('DOMContentLoaded', function () {
+  const faqButtons = document.querySelectorAll('#faqAccordion .accordion-button');
+  faqButtons.forEach(btn => {
+    const icon = btn.querySelector('.faq-toggle-icon');
+    const collapseId = btn.getAttribute('data-bs-target');
+    const collapseEl = document.querySelector(collapseId);
+
+    collapseEl.addEventListener('show.bs.collapse', function () {
+      icon.textContent = '-';
+    });
+    collapseEl.addEventListener('hide.bs.collapse', function () {
+      icon.textContent = '+';
+    });
+
+    // Đảm bảo icon đúng trạng thái khi load lại trang
+    if (!collapseEl.classList.contains('show')) {
+      icon.textContent = '+';
+    } else {
+      icon.textContent = '-';
+    }
+  });
+
+  // Cho phép mở nhiều mục cùng lúc
+  const accordion = document.getElementById('faqAccordion');
+  if (accordion) {
+    accordion.removeAttribute('data-bs-parent');
+    accordion.querySelectorAll('.accordion-collapse').forEach(el => {
+      el.removeAttribute('data-bs-parent');
+    });
+  }
+});
