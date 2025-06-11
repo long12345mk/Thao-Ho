@@ -94,3 +94,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+  const openBtn = document.getElementById('openMobileMenu');
+  const mobileMenu = document.querySelector('.mobile-navbar-menu');
+  const closeBtn = document.querySelector('.mobile-navbar-menu .close-btn');
+  openBtn.addEventListener('click', function() {
+    mobileMenu.classList.remove('d-none');
+    document.body.classList.add('mobile-navbar-open');
+  });
+  closeBtn.addEventListener('click', function() {
+    mobileMenu.classList.add('d-none');
+    document.body.classList.remove('mobile-navbar-open');
+  });
